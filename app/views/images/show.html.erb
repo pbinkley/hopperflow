@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Basename:</strong>
+  <%= @image.basename %>
+</p>
+
+<p>
+  <strong>Extension:</strong>
+  <%= @image.extension %>
+</p>
+
+<p>
+  <strong>Width:</strong>
+  <%= @image.width %>
+</p>
+
+<p>
+  <strong>Height:</strong>
+  <%= @image.height %>
+</p>
+
+<p>
+  <strong>Size:</strong>
+  <%= @image.size %>
+</p>
+
+<p>
+  <strong>Directory:</strong>
+  <%= @image.directory %>
+</p>
+
+<%= link_to 'Edit', edit_image_path(@image) %> |
+<%= link_to 'Back', images_path %>
