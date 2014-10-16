@@ -10,6 +10,7 @@ skip_before_filter  :verify_authenticity_token
   # GET /directories/1
   # GET /directories/1.json
   def show
+      @images = @directory.images
   end
 
   # GET /directories/new
