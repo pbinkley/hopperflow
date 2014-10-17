@@ -1,0 +1,173 @@
+h1 {
+   float : right;
+   font-size : 14pt;
+   margin-right : 3em;
+   font-family : monospace;
+}
+h2 {
+   margin-left : auto;
+   margin-right : auto;
+   font-size : 14pt;
+   font-family : monospace;
+   text-align : center;
+   margin-top : 2px;
+   margin-bottom : 2px;
+}
+img {
+   border : 1px solid black;
+}
+ul {
+   list-style-type : none
+}
+.thumb {
+   text-align : center;
+}
+#wrapper {
+   white-space : nowrap;
+   clear : both;
+}
+.page {
+   padding : 10px;
+   border : 1px solid black;
+   text-align : center;
+}
+#metadataform {
+   position : relative;
+}
+.column {
+   float : left;
+   padding : 0px;
+   border : 1px solid black;
+   width : 380px;
+   min-height : 1500px;
+   background : #eee;
+   overflow : hidden;
+}
+#hoppercolumn {
+   background : #eee;
+}
+#formh2 {
+   display : none;
+}
+#postedcolumn {
+   background : #fcc;
+}
+#postedgroup h2 {
+   border-top: 2px dotted black;
+   margin-top: 10px;
+}
+/* structure of pages in hoppercolumn:
+                  div#hoppercolumn / ul#hopperlist / li.page / ul.pageimages / li.image (with front or back) / a / img
+               */
+.pagelist {
+   position : relative;
+   margin : 0px;
+   padding : 0px;
+}
+.pageimages {
+   margin : auto;
+   padding : 0px;
+   margin : 0px;
+}
+.pageimages li {
+   display : inline-block;
+   border : 1px solid black;
+   background : #ddd;
+   padding : 0px;
+   margin : 0px;
+   font-size : 75%;
+}
+.pagecontrols {
+   margin : 0px;
+   padding : 0px;
+}
+#itemimages {
+   padding : 10px;
+   border : 1px solid black;
+   width : 380px;
+}
+#itemimages li {
+   display : inline-block;
+   border : 1px solid black;
+   background : #ddd;
+   padding : 0px;
+   margin : 0px;
+   font-size : 75%;
+}
+#itemcolumn {
+   background-color : #ffd;
+}
+label {
+   width : 4em;
+   float : left;
+   text-align : right;
+   margin-right : 0.5em;
+   display : block
+}
+#imagecolumn {
+   position : relative;
+   width : 600px;
+   overflow : auto;
+}
+#imagelist {
+   white-space : nowrap;
+   padding : 0;
+   margin : 0;
+}
+#imagelist li {
+   display : inline;
+}
+#imagelist li img {
+   vertical-align : text-top;
+}
+#metadataform {
+   border : 1px solid black;
+   position : relative;
+}
+#submitbutton {
+   float : right;
+   margin : 1em;
+}
+/* buttons created by slider: place at upper right */
+#prevBtn {
+   position : fixed;
+   top : 10px;
+   right : 45px;
+   z-index : 100;
+}
+#nextBtn {
+   position : fixed;
+   top : 10px;
+   right : 5px;
+   z-index : 100;
+}
+.imageholder {
+   position : relative;
+   margin-bottom : 0px;
+}
+.icon {
+   position : absolute;
+   border : 0px;
+   top : 50%;
+   left : 50%;
+   width : 32px;
+   height : 32px;
+   margin-top : -16px;
+   margin-left : -16px;
+}
+.caption {
+   text-align : center;
+   font-size : 75%;
+}
+.citation {
+   text-align : center;
+   font-family : monospace;
+   white-space : normal;
+}
+/* extra styles for scans-review */
+#scans-review li {
+      display : inline-block;
+   }
+#scans-review .image {background: transparent;}
+#scans-review .thumb {width: 50%;}
+#scans-review .page {padding: 0;}
