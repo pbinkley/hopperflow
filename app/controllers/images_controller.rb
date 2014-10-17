@@ -61,6 +61,20 @@ class ImagesController < ApplicationController
     end
   end
 
+  def serve_thumb
+    @image = Image.find(params[:id])
+	@directory = @image.directory
+	send_file Pathname.new(@directory.dirpath).join('hopperflow', 'thumbs', @image.basename + '.gif'),
+		type: "image/gif", disposition: "inline"
+  end
+
+  def serve_display
+    @image = Image.find(params[:id])
+	@directory = @image.directory
+	send_file Pathname.new(@directory.dirpath).join('hopperflow', 'displays', @image.basename + '.jpg'),
+		type: "image/jpg", disposition: "inline"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_image

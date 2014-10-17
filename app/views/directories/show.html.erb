@@ -8,10 +8,17 @@
 </p>
 
 <h2>Images</h2>
-<ul>
+<table>
 	<% @images.each do |image| %>
-		<li><%= image.basename %></li>
+	<tr>
+		<td><%= link_to image do %><%= image.basename %><%= image.extension %><% end %> <br>
+		<%= image.width %>x<%= image.height %> - <%= image.size %> bytes</td>
+		
+		<td><%= link_to image.display_path() do %>
+		<%= image_tag image.thumb_path(), alt: image.basename %>
+		<% end %></td>
+	</tr>	
 	<% end %>
-</ul>
+</table>
 <%= link_to 'Edit', edit_directory_path(@directory) %> |
 <%= link_to 'Back', directories_path %>

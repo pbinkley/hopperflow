@@ -4,6 +4,11 @@ Rails.application.routes.draw do
   resources :directories
   root :to => redirect('/directories/new')
 
+  # serve thumbnails
+  get "/thumbs/:id.thumb.gif", :controller => "images", :action => "serve_thumb"
+  # serve display images
+  get "/displays/:id.display.jpg", :controller => "images", :action => "serve_display"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
