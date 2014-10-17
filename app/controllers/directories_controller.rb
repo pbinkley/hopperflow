@@ -49,24 +49,34 @@ skip_before_filter  :verify_authenticity_token
 	Dir.mkdir(thumbsdir) unless File.exists?(thumbsdir)
 	  
 	# for each image, create thumb and display derivative
-	Dir.glob(dirpath + "*.jpg") do |file|
-		  # TODO use rmagick to determine whether this file is an image
-		  extension = File.extname(file) # .jpg
-		  basename = File.basename(file, extension)
-		  dir = File.dirname(file)
-		  img = Magick::Image::read(file).first
-		  width = img.rows
-		  height = img.columns
-		  # add image to db
-		  i = @directory.images.create(
-		  	basename: basename, 
-		  	extension: extension, 
-		  	width: width, 
-		  	height: height)
-							
-		  # create derivative images
-		  img.resize_to_fit(800,800).write displaysdir + "#{basename}.jpg"
-		  img.resize_to_fit(200,200).write thumbsdir + "#{basename}.gif"
+	Dir.glob(dirpath + "*") do |file|
+		  # use rmagick to determine whether this file is an image
+		  begin
+		  	  # open file as an image - will raise exception if it isn't
+			  img = Magick::Image::read(file).first
+	
+			  # gather metadata about this file
+			  extension = File.extname(file) # .jpg
+			  basename = File.basename(file, extension)
+			  dir = File.dirname(file)
+			  width = img.rows
+			  height = img.columns
+			  size = File.size(file)
+
+			  # add image to db
+			  i = @directory.images.create(
+				basename: basename, 
+				extension: extension, 
+				width: width, 
+				height: height,
+				size: size)
+								
+			  # create derivative images
+			  img.resize_to_fit(800,800).write displaysdir + "#{basename}.jpg"
+			  img.resize_to_fit(200,200).write thumbsdir + "#{basename}.gif"
+		  rescue
+		  	# do nothing
+		  end
 	 end
 	 redirect_to @directory, notice: 'Directory was successfully created.'
   end
