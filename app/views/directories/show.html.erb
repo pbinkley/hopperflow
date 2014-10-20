@@ -1,7 +1,9 @@
 <div id="header">
 <h1>HopperFlow</h1>
 <div id="controls">
-<input onclick="javascript:hopper2item();" value="Hopper->Item" type="button"><input onclick="javascript:item2hopper();" value="Hopper<-Item" type="button"><input onclick="javascript:deletebacks();" value="Delete backs" type="button"><input onclick="javascript:togglebundle();" value="Start bundle" id="bundlebutton" type="button"><input onclick="javascript:hopperOrForm(false);" value="Show Form" type="button" id="hopperOrForm">
+<input onclick="javascript:hopper2item();" value="Hopper->Item" type="button">
+<input onclick="javascript:item2hopper();" value="Hopper<-Item" type="button">
+<input onclick="javascript:hopperOrForm(false);" value="Show Form" type="button" id="hopperOrForm">
 <br>
 <input onclick="javascript:toggleposted();" value="Toggle posted" type="button">
 </div>
@@ -48,27 +50,27 @@
 
 <li class="page" id="row-<%= image.id %>">
 <ul class="pageimages">
-<li id="<%= image.id %>" class="front image">
-<div class="imageholder" id="<%= image.id %>-images">
-<span class="iconspan" id="<%= image.id %>-icon"></span><%= link_to image.display_path(), class: "lightbox" do %>
+<li id="i<%= image.id %>" class="front image">
+<div class="imageholder" id="i<%= image.id %>-images">
+<span class="iconspan" id="i<%= image.id %>-icon"></span><%= link_to image.display_path(), class: "lightbox" do %>
 		<%= image_tag image.thumb_path(), alt: image.basename, class: "thumb" %>
 		<% end %>
 </div>
-<div class="controlsholder" id="<%= image.id %>-controls">
+<div class="controlsholder" id="i<%= image.id %>-controls">
 <span class="caption"><%= image.basename %><%= image.extension %></span>
 <br>
-            Left <input name="<%= image.id %>-control" value="left" id="<%= image.id %>-left" type="radio"> | 
-            Right <input name="<%= image.id %>-control" value="right" id="<%= image.id %>-right" type="radio">
+            Left <input name="i<%= image.id %>-control" value="left" id="i<%= image.id %>-left" type="radio"> | 
+            Right <input name="i<%= image.id %>-control" value="right" id="i<%= image.id %>-right" type="radio">
 <br>
-            Flip <input name="<%= image.id %>-control" value="flip" id="<%= image.id %>-flip" type="radio"> | 
-            Delete <input class="delete-control" name="<%= image.id %>-control" value="delete" id="<%= image.id %>-delete" type="radio">
+            Flip <input name="i<%= image.id %>-control" value="flip" id="i<%= image.id %>-flip" type="radio"> | 
+            Delete <input class="delete-control" name="i<%= image.id %>-control" value="delete" id="i<%= image.id %>-delete" type="radio">
 <br>
-            As is <input class="asis-control" name="<%= image.id %>-control" value="asis" id="<%= image.id %>-asis" type="radio" checked="true">
+            As is <input class="asis-control" name="i<%= image.id %>-control" value="asis" id="i<%= image.id %>-asis" type="radio" checked="true">
 <br>
-            Deskew <input name="<%= image.id %>-deskew" id="<%= image.id %>-deskew" type="checkbox"> | 
-            Split <input name="<%= image.id %>-split" id="<%= image.id %>-split" type="checkbox">
+            Deskew <input name="i<%= image.id %>-deskew" id="i<%= image.id %>-deskew" type="checkbox"> | 
+            Split <input name="i<%= image.id %>-split" id="i<%= image.id %>-split" type="checkbox">
 </div>
-<input value="<%= image.id %>" name="handled" type="hidden">
+<input value="i<%= image.id %>" name="handled" type="hidden">
 </li>
 </ul>
 <input value="" name="homelist" type="hidden">
