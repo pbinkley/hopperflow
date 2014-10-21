@@ -7,6 +7,14 @@ var bundlebuttonfontsize;
 
 // wait for the DOM to be loaded
 $(document).ready(function () {
+
+// autosubmit image forms on change
+// TODO move this to images.js.coffee - it didn't work when I put it there
+//    wrapped in "$(document).ready(function () {"
+	$(".image_form :input").change(function(){ 
+		$(this).closest("form").find(":submit").click()
+	});
+
    bundleid = parseInt($("#bundleid").val());
    bundlenum = parseInt($("#bundlenum").val());
    if (bundlenum > 0)

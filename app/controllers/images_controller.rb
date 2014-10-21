@@ -43,10 +43,10 @@ class ImagesController < ApplicationController
     respond_to do |format|
       if @image.update(image_params)
         format.html { redirect_to @image, notice: 'Image was successfully updated.' }
-        format.json { render :show, status: :ok, location: @image }
+        format.json { render json: @image }
       else
         format.html { render :edit }
-        format.json { render json: @image.errors, status: :unprocessable_entity }
+        format.json { render json: @image.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end
@@ -83,6 +83,6 @@ class ImagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def image_params
-      params.require(:image).permit(:basename, :extension, :width, :height, :size, :directory_id)
+      params.require(:image).permit(:basename, :extension, :width, :height, :size, :directory_id, :modify, :deskew, :split)
     end
 end

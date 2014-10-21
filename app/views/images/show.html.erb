@@ -27,7 +27,22 @@
 
 <p>
   <strong>Directory:</strong>
-  <%= @image.directory %>
+  <%= @image.directory.dirpath %>
+</p>
+
+<p>
+  <strong>Modify:</strong>
+  <%= @image.modify %>
+</p>
+
+<p>
+  <strong>Deskew:</strong>
+  <%= @image.deskew %>
+</p>
+
+<p>
+  <strong>Split:</strong>
+  <%= @image.split %>
 </p>
 
 <%= link_to 'Edit', edit_image_path(@image) %> |

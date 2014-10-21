@@ -1,41 +1,31 @@
-<%= form_for(@image) do |f| %>
-  <% if @image.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@image.errors.count, "error") %> prohibited this image from being saved:</h2>
-
-      <ul>
-      <% @image.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+<%= form_for(@image, remote: true, format: :json, html: {class: :image_form}) do |f| %>
+ <div id="error_explanation" style='display:none;'>
+    <ul>
+      <% if @image.errors.any? %>
+        <% @image.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
+    </ul>
+  </div>
 
-  <div class="field">
-    <%= f.label :basename %><br>
-    <%= f.text_field :basename %>
-  </div>
-  <div class="field">
-    <%= f.label :extension %><br>
-    <%= f.text_field :extension %>
-  </div>
-  <div class="field">
-    <%= f.label :width %><br>
-    <%= f.number_field :width %>
-  </div>
-  <div class="field">
-    <%= f.label :height %><br>
-    <%= f.number_field :height %>
-  </div>
-  <div class="field">
-    <%= f.label :size %><br>
-    <%= f.number_field :size %>
-  </div>
-  <div class="field">
-    <%= f.label :directory_id %><br>
-    <%= f.text_field :directory_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+Left <%= f.radio_button :modify, "left" %> |
+Right <%= f.radio_button :modify, "right" %> 
+
+<br>
+Flip <%= f.radio_button :modify, "flip" %> |
+Delete <%= f.radio_button :modify, "del" %> 
+
+<br>
+As is <%= f.radio_button :modify, "asis" %> 
+
+<br>
+
+Deskew <%= f.check_box :deskew %> | 
+Split <%= f.check_box :split %>
+		
+<input value="i<%= @image.id %>" name="handled" type="hidden">
+         	
+<%= f.submit nil, class: "image_submit" %>
+
 <% end %>

@@ -46,38 +46,28 @@
 
 <ul class="pagelist" id="hopperlist">
 
-	<% @images.each do |image| %>
+	<% @images.each do |image| 
+	@image = image %>
 
-<li class="page" id="row-<%= image.id %>">
+<li class="page" id="row-<%= @image.id %>">
 <ul class="pageimages">
-<li id="i<%= image.id %>" class="front image">
-<div class="imageholder" id="i<%= image.id %>-images">
-<span class="iconspan" id="i<%= image.id %>-icon"></span><%= link_to image.display_path(), class: "lightbox" do %>
-		<%= image_tag image.thumb_path(), alt: image.basename, class: "thumb" %>
+<li id="i<%= @image.id %>" class="front image">
+<div class="imageholder" id="i<%= @image.id %>-images">
+<span class="iconspan" id="i<%= @image.id %>-icon"></span><%= link_to image.display_path(), class: "lightbox" do %>
+		<%= image_tag @image.thumb_path(), alt: @image.basename, class: "thumb" %>
 		<% end %>
 </div>
-<div class="controlsholder" id="i<%= image.id %>-controls">
-<span class="caption"><%= image.basename %><%= image.extension %></span>
+<div class="controlsholder" id="i<%= @image.id %>-controls">
+<span class="caption"><%= @image.basename %><%= @image.extension %></span>
 <br>
-            Left <input name="i<%= image.id %>-control" value="left" id="i<%= image.id %>-left" type="radio"> | 
-            Right <input name="i<%= image.id %>-control" value="right" id="i<%= image.id %>-right" type="radio">
-<br>
-            Flip <input name="i<%= image.id %>-control" value="flip" id="i<%= image.id %>-flip" type="radio"> | 
-            Delete <input class="delete-control" name="i<%= image.id %>-control" value="delete" id="i<%= image.id %>-delete" type="radio">
-<br>
-            As is <input class="asis-control" name="i<%= image.id %>-control" value="asis" id="i<%= image.id %>-asis" type="radio" checked="true">
-<br>
-            Deskew <input name="i<%= image.id %>-deskew" id="i<%= image.id %>-deskew" type="checkbox"> | 
-            Split <input name="i<%= image.id %>-split" id="i<%= image.id %>-split" type="checkbox">
+
+<%= render 'images/form' %>
 </div>
-<input value="i<%= image.id %>" name="handled" type="hidden">
 </li>
 </ul>
-<input value="" name="homelist" type="hidden">
 </li>
 
-
-	<% end %>
+<% end %>
 <!--
                      
                      
