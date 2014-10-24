@@ -1,0 +1,51 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  source: MyString
+  folder: MyString
+  bundleid: 1
+  bundlenum: 1
+  itemid: 1
+  pages: 1
+  ocr: false
+  adjust: false
+  date: MyString
+  creator: MyString
+  addressee: MyString
+  type: 1
+  copytype: 
+  script: 1
+  envelope: false
+  title: MyString
+  summary: MyText
+  notes: MyText
+  tags: MyString
+  answers: MyString
+  answeredby: MyString
+  hascopy: MyString
+  copyof: MyString
+
+two:
+  source: MyString
+  folder: MyString
+  bundleid: 1
+  bundlenum: 1
+  itemid: 1
+  pages: 1
+  ocr: false
+  adjust: false
+  date: MyString
+  creator: MyString
+  addressee: MyString
+  type: 1
+  copytype: 
+  script: 1
+  envelope: false
+  title: MyString
+  summary: MyText
+  notes: MyText
+  tags: MyString
+  answers: MyString
+  answeredby: MyString
+  hascopy: MyString
+  copyof: MyString
