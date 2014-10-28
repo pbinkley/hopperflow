@@ -52,17 +52,7 @@
 <li class="page" id="row-<%= @image.id %>">
 <ul class="pageimages">
 <li id="i<%= @image.id %>" class="front image">
-<div class="imageholder" id="i<%= @image.id %>-images">
-<span class="iconspan" id="i<%= @image.id %>-icon"></span><%= link_to image.display_path(), class: "lightbox" do %>
-		<%= image_tag @image.thumb_path(), alt: @image.basename, class: "thumb" %>
-		<% end %>
-</div>
-<div class="controlsholder" id="i<%= @image.id %>-controls">
-<span class="caption"><%= @image.basename %><%= @image.extension %></span>
-<br>
-
 <%= render 'images/form' %>
-</div>
 </li>
 </ul>
 </li>

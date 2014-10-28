@@ -9,6 +9,18 @@
     </ul>
   </div>
 
+  <div class="imageholder" id="i<%= @image.id %>-images">
+<span class="iconspan" id="i<%= @image.id %>-icon"></span><%= link_to @image.display_path(), class: "lightbox" do %>
+		<%= image_tag @image.thumb_path(), alt: @image.basename, class: "thumb" %>
+		<% end %>
+</div>
+
+  <div class="controlsholder" id="i<%= @image.basename %>-controls">
+<span class="caption"><%= @image.basename %><%= @image.extension %></span>
+<br>
+
+
+
 Left <%= f.radio_button :modify, "left" %> |
 Right <%= f.radio_button :modify, "right" %> 
 
@@ -27,5 +39,7 @@ Split <%= f.check_box :split %>
 <input value="i<%= @image.id %>" name="handled" type="hidden">
          	
 <%= f.submit nil, class: "image_submit" %>
+
+</div>
 
 <% end %>
