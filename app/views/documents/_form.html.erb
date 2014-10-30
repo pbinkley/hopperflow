@@ -1,48 +1,20 @@
-<%= form_for(@document) do |f| %>
-  <% if @document.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@document.errors.count, "error") %> prohibited this document from being saved:</h2>
-
-      <ul>
-      <% @document.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :source %><br>
-    <%= f.text_field :source %>
-  </div>
-  <div class="field">
-    <%= f.label :folder %><br>
-    <%= f.text_field :folder %>
-  </div>
-  <div class="field">
-    <%= f.label :bundleid %><br>
-    <%= f.number_field :bundleid %>
-  </div>
-  <div class="field">
-    <%= f.label :bundlenum %><br>
-    <%= f.number_field :bundlenum %>
-  </div>
-  <div class="field">
-    <%= f.label :itemid %><br>
-    <%= f.number_field :itemid %>
-  </div>
+<%= form_for :document, remote: true, format: :json, url: documents_path do |f| %>
+    <%= f.submit %> <input type="reset">
+<%= f.hidden_field :source, :value => "" %>
+<%= f.hidden_field :folder, :value => "" %>
+<%= f.hidden_field :bundleid, :value => "0" %>
+<%= f.hidden_field :bundlenum, :value => "0" %>
+<%= f.hidden_field :itemid, :value => "" %>
   <div class="field">
     <%= f.label :pages %><br>
     <%= f.number_field :pages %>
-  </div>
-  <div class="field">
+
     <%= f.label :ocr %><br>
     <%= f.check_box :ocr %>
-  </div>
-  <div class="field">
     <%= f.label :adjust %><br>
     <%= f.check_box :adjust %>
   </div>
+
   <div class="field">
     <%= f.label :date %><br>
     <%= f.text_field :date %>
@@ -58,16 +30,12 @@
   <div class="field">
     <%= f.label :type %><br>
     <%= f.number_field :type %>
-  </div>
-  <div class="field">
     <%= f.label :copytype %><br>
     <%= f.text_field :copytype %>
   </div>
   <div class="field">
     <%= f.label :script %><br>
     <%= f.number_field :script %>
-  </div>
-  <div class="field">
     <%= f.label :envelope %><br>
     <%= f.check_box :envelope %>
   </div>
@@ -90,20 +58,13 @@
   <div class="field">
     <%= f.label :answers %><br>
     <%= f.text_field :answers %>
-  </div>
-  <div class="field">
     <%= f.label :answeredby %><br>
     <%= f.text_field :answeredby %>
   </div>
   <div class="field">
     <%= f.label :hascopy %><br>
     <%= f.text_field :hascopy %>
-  </div>
-  <div class="field">
     <%= f.label :copyof %><br>
     <%= f.text_field :copyof %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
   </div>
 <% end %>

@@ -11,10 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141020184209) do
+ActiveRecord::Schema.define(version: 20141024152928) do
 
   create_table "directories", force: true do |t|
     t.string   "dirpath"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "documents", force: true do |t|
+    t.string   "source"
+    t.string   "folder"
+    t.integer  "bundleid"
+    t.integer  "bundlenum"
+    t.integer  "itemid"
+    t.integer  "pages"
+    t.boolean  "ocr"
+    t.boolean  "adjust"
+    t.string   "date"
+    t.string   "creator"
+    t.string   "addressee"
+    t.integer  "type"
+    t.integer  "copytype"
+    t.integer  "script"
+    t.boolean  "envelope"
+    t.string   "title"
+    t.text     "summary"
+    t.text     "notes"
+    t.string   "tags"
+    t.string   "answers"
+    t.string   "answeredby"
+    t.string   "hascopy"
+    t.string   "copyof"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

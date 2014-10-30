@@ -13,7 +13,7 @@ class CreateDocuments < ActiveRecord::Migration
       t.string :creator
       t.string :addressee
       t.integer :type
-      t.integr :copytype
+      t.integer :copytype
       t.integer :script
       t.boolean :envelope
       t.string :title
