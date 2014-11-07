@@ -24,8 +24,10 @@ class ImagesController < ApplicationController
   # POST /images
   # POST /images.json
   def create
-    @image = Image.new(image_params)
-
+  logger.info image_params.to_str
+  image_params.width = 666
+	@image = Image.new(image_params)
+	
     respond_to do |format|
       if @image.save
         format.html { redirect_to @image, notice: 'Image was successfully created.' }
@@ -74,6 +76,7 @@ class ImagesController < ApplicationController
 	send_file Pathname.new(@directory.dirpath).join('hopperflow', 'displays', @image.basename + '.jpg'),
 		type: "image/jpg", disposition: "inline"
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

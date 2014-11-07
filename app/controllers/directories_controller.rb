@@ -25,60 +25,62 @@ skip_before_filter  :verify_authenticity_token
   # POST /directories
   # POST /directories.json
   def create
-  require 'RMagick'
-
-    @directory = Directory.new(directory_params)
-
-	# set and test dirpath
-	dirpath = Pathname(@directory.dirpath)
-	raise RuntimeError, dirpath + " does not exist" unless dirpath.exist?
-	raise RuntimeError, dirpath + " is not a directory" unless dirpath.directory?
-	raise RuntimeError, dirpath + " is not readable" unless dirpath.readable?
-	raise RuntimeError, dirpath + " is not writable" unless dirpath.writable?
+	require 'RMagick'
+	@directory = Directory.new(directory_params)
 	
-	# dirpath is ok, so save this directory
-	@directory.save
-
-	# note that dirpath is a Path, therefore handles separators automatically
-	hopperdir = dirpath + "hopperflow"
-	displaysdir = hopperdir + "displays"
-	thumbsdir = hopperdir + "thumbs"
-	# create originals, thumbs and displays directories
-	Dir.mkdir(hopperdir) unless File.exists?(hopperdir)
-	Dir.mkdir(displaysdir) unless File.exists?(displaysdir)
-	Dir.mkdir(thumbsdir) unless File.exists?(thumbsdir)
-	  
-	# for each image, create thumb and display derivative
-	Dir.glob(dirpath + "*") do |file|
-		  # use rmagick to determine whether this file is an image
-		  begin
-		  	  # open file as an image - will raise exception if it isn't
-			  img = Magick::Image::read(file).first
+	if @directory.valid?
 	
-			  # gather metadata about this file
-			  extension = File.extname(file) # .jpg
-			  basename = File.basename(file, extension)
-			  dir = File.dirname(file)
-			  width = img.rows
-			  height = img.columns
-			  size = File.size(file)
+		# set and test dirpath
+		dirpath = Pathname(@directory.dirpath)
+		
+		# note that dirpath is a Path, therefore handles separators automatically
+		hopperdir = dirpath + "hopperflow"
+		displaysdir = hopperdir + "displays"
+		thumbsdir = hopperdir + "thumbs"
+		# create originals, thumbs and displays directories
+		Dir.mkdir(hopperdir) unless File.exists?(hopperdir)
+		Dir.mkdir(displaysdir) unless File.exists?(displaysdir)
+		Dir.mkdir(thumbsdir) unless File.exists?(thumbsdir)
 
-			  # add image to db
-			  i = @directory.images.create(
-				basename: basename, 
-				extension: extension, 
-				width: width, 
-				height: height,
-				size: size)
-								
-			  # create derivative images
-			  img.resize_to_fit(800,800).write displaysdir + "#{basename}.jpg"
-			  img.resize_to_fit(200,200).write thumbsdir + "#{basename}.gif"
-		  rescue
-		  	# do nothing
-		  end
-	 end
-	 redirect_to @directory, notice: 'Directory was successfully created.'
+		@directory.save
+		
+		# for each image, create thumb and display derivative
+		Dir.glob(dirpath + "*") do |file|
+
+			# use rmagick to determine whether this file is an image
+			begin
+				# open file as an image - will raise exception if it isn't
+				img = Magick::Image::read(file).first
+				
+				extension = File.extname(file) # e.g. ".jpg"
+				basename = File.basename(file, extension)
+					
+				# add image to db
+				i = @directory.images.create(
+					extension: extension,
+					basename: basename,
+					width: img.rows,
+					height: img.columns,
+					size: File.size(file)
+				)
+				
+				img.resize_to_fit(800,800).write dirpath + "hopperflow" + "displays" + "#{basename}.jpg"
+				img.resize_to_fit(200,200).write dirpath + "hopperflow" + "thumbs" + "#{basename}.gif"
+				
+			rescue Exception => e
+				# do nothing - it's not an image
+			end
+		end
+	end
+	respond_to do |format|
+		if @directory.save
+			format.html { redirect_to @directory, notice: 'Directory was successfully created.' }
+			format.json { render :show, status: :created, location: @directory }
+		else
+			format.html { render :new }
+			format.json { render json: @image.errors, status: :unprocessable_entity }
+		end
+	end
   end
 
   # PATCH/PUT /directories/1
