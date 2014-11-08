@@ -52,21 +52,23 @@ skip_before_filter  :verify_authenticity_token
 				# open file as an image - will raise exception if it isn't
 				img = Magick::Image::read(file).first
 				
-				extension = File.extname(file) # e.g. ".jpg"
-				basename = File.basename(file, extension)
+				if img.format != 'TXT'
+					extension = File.extname(file) # e.g. ".jpg"
+					basename = File.basename(file, extension)
+						
+					# add image to db
+					i = @directory.images.create(
+						extension: extension,
+						basename: basename,
+						width: img.rows,
+						height: img.columns,
+						size: File.size(file),
+						format: img.format
+					)
 					
-				# add image to db
-				i = @directory.images.create(
-					extension: extension,
-					basename: basename,
-					width: img.rows,
-					height: img.columns,
-					size: File.size(file)
-				)
-				
-				img.resize_to_fit(800,800).write dirpath + "hopperflow" + "displays" + "#{basename}.jpg"
-				img.resize_to_fit(200,200).write dirpath + "hopperflow" + "thumbs" + "#{basename}.gif"
-				
+					img.resize_to_fit(800,800).write dirpath + "hopperflow" + "displays" + "#{basename}.jpg"
+					img.resize_to_fit(200,200).write dirpath + "hopperflow" + "thumbs" + "#{basename}.gif"
+				end				
 			rescue Exception => e
 				# do nothing - it's not an image
 			end
