@@ -1,6 +1,8 @@
 class Image < ActiveRecord::Base
   belongs_to :directory
   belongs_to :document
+  validates :basename, presence: true
+
 
   def thumb_path()
     "/thumbs/#{id}.thumb.gif"
