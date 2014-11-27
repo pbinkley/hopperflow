@@ -1,4 +1,5 @@
 class ImagesController < ApplicationController
+  #skip_before_filter :verify_authenticity_token
   before_action :set_image, only: [:show, :edit, :update, :destroy]
 
   # GET /images
@@ -24,8 +25,6 @@ class ImagesController < ApplicationController
   # POST /images
   # POST /images.json
   def create
-  logger.info image_params.to_str
-  image_params.width = 666
 	@image = Image.new(image_params)
 	
     respond_to do |format|
@@ -86,6 +85,6 @@ class ImagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def image_params
-      params.require(:image).permit(:basename, :extension, :width, :height, :size, :format, :directory_id, :modify, :deskew, :split)
+      params.require(:image).permit(:basename, :extension, :width, :height, :size, :format, :directory_id, :modify, :deskew, :split, :document_id)
     end
 end

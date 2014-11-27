@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141108000238) do
+ActiveRecord::Schema.define(version: 20141109021117) do
 
   create_table "directories", force: true do |t|
     t.string   "dirpath"
@@ -60,8 +60,10 @@ ActiveRecord::Schema.define(version: 20141108000238) do
     t.boolean  "deskew",       default: false
     t.boolean  "split",        default: false
     t.string   "format"
+    t.integer  "document_id"
   end
 
   add_index "images", ["directory_id"], name: "index_images_on_directory_id"
+  add_index "images", ["document_id"], name: "index_document_id"
 
 end
